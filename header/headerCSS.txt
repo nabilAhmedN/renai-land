@@ -1,0 +1,226 @@
+#header {
+  position: fixed;
+  left: 0;
+  z-index: 52;
+  width: 100%;
+  color: var(--color-black);
+  padding: var(--base-padding-y) var(--base-padding-x);
+  font-size: clamp(1rem,1vw,1.5rem);
+  transition: color .25s;
+  pointer-events: none;
+
+#header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding-bottom: .1em;
+
+#header-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: calc(var(--vh, 1vh) * 100);
+  width: 50vw;
+  background: linear-gradient(270deg,rgba(11,11,18,.5) 0%,rgba(11,11,18,0) 100%);
+  opacity: 0;
+  transition: .4s .4s opacity;
+  pointer-events: none;
+}
+
+#header-center-project-back-btn {
+  position: absolute;
+  left: 54.5em;
+  top: calc(var(--base-padding-y));
+  padding: 0 1.5em 0 1em;
+  height: 3.2em;
+  font-size: .875em;
+  background: #fff;
+  color: var(--project-details-btn-text);
+  color: var(--color-black);
+  font-weight: 500;
+  border-radius: 100px;
+  border: none;
+  text-transform: uppercase;
+  width: fit-content;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .625em;
+  overflow: hidden;
+  transform: scale(0);
+}
+
+
+#header-center-project-back-btn svg {
+  height: 1.2em;
+  width: 1.2em;
+  transition: color .5s,transform .4s cubic-bezier(.4,0,.1,1);
+  z-index: 1;
+}
+
+#header p {
+  margin: 0;
+}
+#header-center-project-back-btn-text {
+  transition: color .5s,transform .4s cubic-bezier(.4,0,.1,1);
+  margin: 0;
+  z-index: 1;
+}
+
+#header-center-project-back-btn svg {
+  height: 1.2em;
+  width: 1.2em;
+  transition: color .5s,transform .4s cubic-bezier(.4,0,.1,1);
+  z-index: 1;
+}
+#header-center-project-back-btn-svg2 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  transform: translate3d(1em,0,0);
+}
+
+#project-details-header-back-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--project-details-btn-bg-hover);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .3s cubic-bezier(.16,1,.3,1);
+}
+
+
+#header-right-sound-btn
+
+{
+position: relative;
+font-size: .875em;
+height: 3.2em;
+width: 3.2em;
+border: none;
+padding: 0;
+transparent; background:
+overflow: hidden;
+z-index: 1;
+cursor: pointer;
+}
+
+#header-right-talk-btn-placeholder{
+border: none;
+position: absolute;
+font-size: .875em;
+border-radius: 6.25em;
+height: 3.2em;
+width: 9.5em;
+left: 4.5em;
+visibility: hidden;
+padding: 0;
+}
+
+#header-right-talk-btn{
+position: absolute;
+left: 4.5em;
+background:
+var(--color-grey-blue);
+transition: color.4s, background-color
+.45;
+overflow: hidden;
+color:
+var(--color-white );
+}
+
+
+#header-right-talk-
+container
+{
+display:
+flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+gap: .625em;
+white-space: nowrap;
+}
+
+#header-right-menu-btn {
+    background: var(--color-dark-white);
+    color: var(--color-black);
+}
+#header-right-talk-btn, #header-right-menu-btn {
+    font-size: .875em;
+    border-radius: 6.25em;
+    padding: 0 1.125em 0 1.625em;
+    font-weight: 500;
+    text-transform: uppercase;
+    border: none;
+    transform: scale(0);
+    transition: color .4s, background-color .4s;
+    height: 3.2em;
+    cursor: pointer;
+}
+
+#header-right-menu-btn-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: transparent;
+    overflow: hidden;
+    gap: .625em;
+}
+
+#header-right-menu-btn-text {
+    transition: transform .3s cubic-bezier(.4, 0, .1, 1);
+    line-height: 1.2em;
+}
+
+#header-right-menu-btn-text-close {
+    position: absolute;
+    transform: translate3d(0, 100%, 0);
+    left: 0;
+    transition: transform .3s cubic-bezier(.4, 0, .1, 1);
+}
+
+#header-right-menu-btn-dots {
+    position: relative;
+    transition: transform .4s cubic-bezier(.4, 0, .1, 1);
+    transform: translateZ(0) rotate(180deg);
+    width: 1.15em;
+    height: 1.15em;
+}
+
+#header-right-menu-btn-dots .header-right-menu-btn-dot:first-child {
+    left: .1em;
+    top: 50%;
+}
+#header-right-menu-btn-dots .header-right-menu-btn-dot {
+    position: absolute;
+    display: inline-block;
+    width: .3125em;
+    height: .3125em;
+    background: currentColor;
+    border-radius: 100%;
+    transition: background-color .4s;
+    transform: translateY(-50%);
+}
+
+
+#header-right-menu-btn-dots .header-right-menu-btn-dot:last-child {
+    right: .1;
+    top: 50%;
+}
+#header-right-menu-btn-dots .header-right-menu-btn-dot {
+    position: absolute;
+    display: inline-block;
+    width: .3125em;
+    height: .3125em;
+    background: currentColor;
+    border-radius: 100%;
+    transition: background-color .4s;
+    transform: translateY(-50%);
+}
