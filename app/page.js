@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import HomeHero from './components/HomeHero';
+import HomeReel from './components/HomeReel';
 
 export default function LusionHomepage() {
   return (
@@ -15,6 +16,9 @@ export default function LusionHomepage() {
           <div id="home" className="page">
             {/* Home Hero Section */}
             <HomeHero />
+
+            {/* Home Reel Section */}
+            <HomeReel />
           </div>
         </div>
       </div>
