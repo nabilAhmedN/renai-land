@@ -1,11 +1,83 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeReel() {
     const pathname = usePathname();
+    const videoPlaceholderRef = useRef(null);
+    const videoThumbRef = useRef(null);
+
+    useEffect(() => {
+        const videoPlaceholder = videoPlaceholderRef.current;
+        const videoThumb = videoThumbRef.current;
+
+        if (!videoPlaceholder || !videoThumb) return;
+
+        let initialThumbRect = null;
+        // Save the original style attribute completely
+        const originalStyle = videoThumb.getAttribute('style') || '';
+
+        // Create the scroll-triggered animation
+        const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: videoPlaceholder,
+                start: 'top 80%',
+                end: 'top 20%',
+                scrub: 0.3,
+                markers: true, // For debugging - remove after testing
+                onEnter: () => {
+                    // Store initial position when animation starts
+                    initialThumbRect = videoThumb.getBoundingClientRect();
+
+                    // Make thumb fixed with explicit paddingTop removal
+                    videoThumb.style.position = 'fixed';
+                    videoThumb.style.top = initialThumbRect.top + 'px';
+                    videoThumb.style.left = initialThumbRect.left + 'px';
+                    videoThumb.style.width = initialThumbRect.width + 'px';
+                    videoThumb.style.height = initialThumbRect.height + 'px';
+                    videoThumb.style.paddingTop = '0';
+                    videoThumb.style.zIndex = '1000';
+                    videoThumb.style.margin = '0';
+                },
+                onLeaveBack: () => {
+                    // Restore original style attribute completely
+                    videoThumb.setAttribute('style', originalStyle);
+                    initialThumbRect = null;
+                },
+                onUpdate: (self) => {
+                    const placeholderRect = videoPlaceholder.getBoundingClientRect();
+                    const progress = self.progress;
+
+                    if (initialThumbRect && progress > 0) {
+                        // Calculate target values
+                        const targetTop = placeholderRect.top;
+                        const targetLeft = placeholderRect.left;
+                        const targetWidth = placeholderRect.width;
+                        const targetHeight = placeholderRect.height;
+
+                        // Interpolate between initial and target
+                        videoThumb.style.top = (initialThumbRect.top + (targetTop - initialThumbRect.top) * progress) + 'px';
+                        videoThumb.style.left = (initialThumbRect.left + (targetLeft - initialThumbRect.left) * progress) + 'px';
+                        videoThumb.style.width = (initialThumbRect.width + (targetWidth - initialThumbRect.width) * progress) + 'px';
+                        videoThumb.style.height = (initialThumbRect.height + (targetHeight - initialThumbRect.height) * progress) + 'px';
+                        videoThumb.style.borderRadius = (1.5 * (1 - progress)) + 'rem';
+                    }
+                }
+            });
+        });
+
+        return () => {
+            ctx.revert();
+            // Restore on cleanup too
+            videoThumb.setAttribute('style', originalStyle);
+        };
+    }, []);
     return (
         <section
             id="home-reel"
@@ -95,7 +167,7 @@ export default function HomeReel() {
                     top: '-4em'
                 }}
             >
-                <div id="home-reel-thumb" style={{
+                <div ref={videoThumbRef} id="home-reel-thumb" style={{
                     fontSize: '2.4rem',
                     paddingTop: '56.25%',
                     height: 0,
@@ -196,10 +268,11 @@ export default function HomeReel() {
 
                         {/* Video Placeholder */}
                         <div
+                            ref={videoPlaceholderRef}
                             id="home-reel-video-placeholder"
                             className="absolute inset-0 flex items-center justify-center"
                         >
-                            <video
+                            {/* <video
                                 autoPlay
                                 loop
                                 muted
@@ -215,7 +288,7 @@ export default function HomeReel() {
                                 }}
                             >
                                 <source src="/videos/Ideas.mp4" type="video/mp4" />
-                            </video>
+                            </video> */}
                             <div
                                 id="home-reel-video-title"
                                 className="text-white text-4xl md:text-6xl font-light tracking-wide"
