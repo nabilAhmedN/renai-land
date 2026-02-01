@@ -2,10 +2,11 @@ import React from 'react';
 import Header from './components/Header';
 import HomeHero from './components/HomeHero';
 import HomeReel from './components/HomeReel';
+import HomeFeatured from './components/HomeFeatured';
 
 export default function LusionHomepage() {
   return (
-    <div className="min-h-screen bg-[#f0f1fa] font-['Helvetica_Neue',_sans-serif]">
+    <div className="min-h-screen bg-[#f0f1fa] font-['Helvetica_Neue',sans-serif]">
       {/* Lusion Header Component */}
       <Header />
 
@@ -19,6 +20,8 @@ export default function LusionHomepage() {
 
             {/* Home Reel Section */}
             <HomeReel />
+
+            <HomeFeatured />
           </div>
         </div>
       </div>
