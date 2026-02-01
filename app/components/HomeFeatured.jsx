@@ -253,7 +253,6 @@ const ProjectCard = ({ project, index }) => {
 };
 
 export default function HomeFeatured() {
-    const [ctaHovered, setCtaHovered] = useState(false);
 
     return (
         <section
@@ -328,34 +327,10 @@ export default function HomeFeatured() {
             </div>
 
             {/* CTA Button */}
-            <Link
-                href="/projects"
-                id="home-featured-cta"
-                className="col-span-12 flex items-center justify-center gap-4 mx-auto mt-24 px-6 py-4 rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300"
-                style={{
-                    fontSize: 'clamp(0.875rem, 1vw, 1.75rem)',
-                    fontWeight: 500,
-                    textTransform: 'uppercase',
-                    boxShadow: '0 6px 10px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.1)'
-                }}
-                onMouseEnter={() => setCtaHovered(true)}
-                onMouseLeave={() => setCtaHovered(false)}
-            >
-                <span
-                    id="home-featured-cta-dot"
-                    className="w-2 h-2 rounded-full bg-white transition-transform duration-300"
-                    style={{
-                        transform: ctaHovered ? 'scale(1.5)' : 'scale(1)'
-                    }}
-                />
+            <a id="home-featured-cta" href="/projects">
+                <span id="home-featured-cta-dot"></span>
                 <span id="home-featured-cta-text">See all projects</span>
-                <span
-                    id="home-featured-cta-arrow"
-                    className="transition-transform duration-300"
-                    style={{
-                        transform: ctaHovered ? 'translateX(4px)' : 'translateX(0)'
-                    }}
-                >
+                <span id="home-featured-cta-arrow">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -369,10 +344,10 @@ export default function HomeFeatured() {
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M2.343 8h11.314m0 0L8.673 3.016M13.657 8l-4.984 4.984"
-                        />
+                        ></path>
                     </svg>
                 </span>
-            </Link>
+            </a>
         </section>
     );
 }
