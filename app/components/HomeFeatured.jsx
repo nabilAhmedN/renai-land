@@ -287,7 +287,7 @@ export default function HomeFeatured() {
                             lineHeight: '0.9'
                         }}
                     >
-                        <AnimatedTitle text="Featured Work" />
+                        <AnimatedTitle text="Collections" />
                     </h4>
                 </div>
 
@@ -302,13 +302,13 @@ export default function HomeFeatured() {
                     }}
                 >
                     <div className="overflow-hidden">
-                        <div className="line">a Selection of our most passionately</div>
+                        <div className="line">An exclusive selection of meticulously</div>
                     </div>
                     <div className="overflow-hidden">
-                        <div className="line">crafted works with forward-thinking</div>
+                        <div className="line">crafted garments, created with visionary</div>
                     </div>
                     <div className="overflow-hidden">
-                        <div className="line">clients and friends over the years.</div>
+                        <div className="line">collaborators over the years.</div>
                     </div>
                 </div>
             </div>

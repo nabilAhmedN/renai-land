@@ -8,6 +8,7 @@ export default function HomeHero() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const imageStackRef = useRef(null);
     const imagesRef = useRef([]);
+    const titleRef = useRef(null);
 
     const images = [
         '/images/renai1.jpeg',
@@ -16,7 +17,7 @@ export default function HomeHero() {
     ];
 
     useEffect(() => {
-        // GSAP animation: slide up from below on mount
+        // GSAP animation: slide up from below on mount for images
         if (imagesRef.current.length > 0) {
             gsap.fromTo(
                 imagesRef.current,
@@ -30,6 +31,28 @@ export default function HomeHero() {
                     duration: 1.2,
                     ease: 'power3.out',
                     stagger: 0 // All together as requested
+                }
+            );
+        }
+
+        // Word-by-word reveal animation for title
+        if (titleRef.current) {
+            const words = titleRef.current.querySelectorAll('.word');
+            gsap.fromTo(
+                words,
+                {
+                    y: 80,
+                    opacity: 0,
+                    rotateX: 45
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    rotateX: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    stagger: 0.08,
+                    delay: 0.3
                 }
             );
         }
@@ -53,11 +76,13 @@ export default function HomeHero() {
             {/* Hero Title */}
             <h1
                 id="home-hero-title"
+                ref={titleRef}
                 className="relative h-fit m-0 will-change-transform"
                 style={{
                     gridColumn: '4 / span 5',
                     lineHeight: '1.1',
-                    fontSize: '2.5vw'
+                    fontSize: '2.5vw',
+                    perspective: '1000px'
                 }}
             >
                 {/* Line 1 */}

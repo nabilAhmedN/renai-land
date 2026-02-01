@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { gsap } from 'gsap';
 
 // Icon Components
 const FactoryIcon = () => (
@@ -22,6 +23,38 @@ export default function Header() {
     const [isMenuHovered, setIsMenuHovered] = useState(false);
     const [soundOn, setSoundOn] = useState(false);
     const pathname = usePathname();
+
+    const logoRef = useRef(null);
+    const headerRightRef = useRef(null);
+
+    useEffect(() => {
+        // Entrance animation for logo - same as text animation
+        if (logoRef.current) {
+            gsap.fromTo(
+                logoRef.current,
+                { y: 80, opacity: 0, rotateX: 45 },
+                { y: 0, opacity: 1, rotateX: 0, duration: 0.8, ease: 'power3.out', delay: 0.3 }
+            );
+        }
+
+        // Entrance animation for header buttons - same as text animation
+        if (headerRightRef.current) {
+            const buttons = headerRightRef.current.querySelectorAll('button, a');
+            gsap.fromTo(
+                buttons,
+                { y: 80, opacity: 0, rotateX: 45 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    rotateX: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    stagger: 0.08,
+                    delay: 0.4
+                }
+            );
+        }
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -57,6 +90,7 @@ export default function Header() {
                     <Link
                         id="header-logo"
                         href="/"
+                        ref={logoRef}
                         aria-label="Go to home page"
                         className="pointer-events-auto"
                     >
@@ -101,7 +135,7 @@ export default function Header() {
                     </div>
 
                     {/* Header Right - Buttons */}
-                    <div id="header-right" className="flex items-center gap-3 pointer-events-auto">
+                    <div id="header-right" ref={headerRightRef} className="flex items-center gap-3 pointer-events-auto">
                         {/* Sound Button */}
                         <button
                             onClick={() => setSoundOn(!soundOn)}

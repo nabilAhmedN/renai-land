@@ -127,7 +127,7 @@ export default function HomeReel() {
                 start: 'top 80%',
                 end: 'top 20%',
                 scrub: 0.3,
-                markers: true, // For debugging - remove after testing
+                // markers: true, // For debugging - uncomment when needed
                 onEnter: () => {
                     // Store original position when first entering
                     if (!originalThumbPosition) {
