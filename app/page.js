@@ -3,6 +3,8 @@ import Header from './components/Header';
 import HomeHero from './components/HomeHero';
 import HomeReel from './components/HomeReel';
 import HomeFeatured from './components/HomeFeatured';
+import Footer from './components/Footer';
+import ScrollNav from './components/ScrollNav';
 
 export default function LusionHomepage() {
   return (
@@ -22,6 +24,12 @@ export default function LusionHomepage() {
             <HomeReel />
 
             <HomeFeatured />
+
+            {/* Footer Section */}
+            <Footer />
+
+            {/* Scroll Nav Section */}
+            <ScrollNav />
           </div>
         </div>
       </div>
@@ -131,6 +139,6 @@ export default function LusionHomepage() {
           </div>
         </section>
       </div> */}
-    </div>
+    </div >
   );
 }
