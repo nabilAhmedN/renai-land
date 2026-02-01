@@ -28,10 +28,52 @@ const CrossIcon = () => (
     </svg>
 );
 
+// Decorative Line SVG component
+const DecorativeLine = ({ lineRef }) => (
+    <svg
+        className="decorative-line-svg"
+        viewBox="0 0 800 200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '80%',
+            height: 'auto',
+            pointerEvents: 'none',
+            zIndex: 0,
+            opacity: 0.3
+        }}
+    >
+        <path
+            ref={lineRef}
+            d="M0 100 C 100 20, 200 180, 300 100 S 500 20, 600 100 S 700 180, 800 100"
+            stroke="url(#lineGradient)"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+            style={{
+                strokeDasharray: 1200,
+                strokeDashoffset: 1200
+            }}
+        />
+        <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#4ade80" />
+                <stop offset="50%" stopColor="#22d3ee" />
+                <stop offset="100%" stopColor="#a78bfa" />
+            </linearGradient>
+        </defs>
+    </svg>
+);
+
 export default function ScrollNav() {
     const router = useRouter();
     const sectionRef = useRef(null);
     const progressBarRef = useRef(null);
+    const lineRef = useRef(null);
     const [hasNavigated, setHasNavigated] = useState(false);
     const progressRef = useRef(0);
     const isActiveRef = useRef(false);
@@ -39,6 +81,22 @@ export default function ScrollNav() {
 
     useEffect(() => {
         if (!sectionRef.current || !progressBarRef.current) return;
+
+        // Animate decorative line on scroll
+        if (lineRef.current) {
+            ScrollTrigger.create({
+                trigger: sectionRef.current,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    gsap.set(lineRef.current, {
+                        strokeDashoffset: 1200 - (progress * 1200)
+                    });
+                }
+            });
+        }
 
         // Reset progress bar to 0
         const resetProgress = () => {
@@ -133,10 +191,15 @@ export default function ScrollNav() {
             id="scroll-nav-section"
             className="section"
             style={{
-                padding: 'var(--base-padding-y) var(--base-padding-x)'
+                padding: 'var(--base-padding-y) var(--base-padding-x)',
+                position: 'relative',
+                overflow: 'hidden'
             }}
         >
-            <div id="scroll-nav-content">
+            {/* Decorative Line SVG */}
+            <DecorativeLine lineRef={lineRef} />
+
+            <div id="scroll-nav-content" style={{ position: 'relative', zIndex: 1 }}>
                 {/* Subtitle */}
                 <div id="scroll-nav-subtitle">
                     Keep Scrolling<br />to Learn More

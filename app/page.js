@@ -5,15 +5,19 @@ import HomeReel from './components/HomeReel';
 import HomeFeatured from './components/HomeFeatured';
 import Footer from './components/Footer';
 import ScrollNav from './components/ScrollNav';
+import { LiquidEffectAnimation } from './components/ui/LiquidEffectAnimation';
 
 export default function LusionHomepage() {
   return (
-    <div className="min-h-screen bg-[#f0f1fa] font-['Helvetica_Neue',sans-serif]">
+    <div className="min-h-screen bg-[#f0f1fa] font-['Helvetica_Neue',sans-serif] relative">
+      {/* Liquid Fabric Effect - Site-wide background */}
+      <LiquidEffectAnimation isFixed={true} />
+
       {/* Lusion Header Component */}
       <Header />
 
       {/* Page Container */}
-      <div id="page-container" className="relative">
+      <div id="page-container" className="relative z-10">
         <div id="page-container-inner">
           {/* Home Page */}
           <div id="home" className="page">
@@ -25,11 +29,14 @@ export default function LusionHomepage() {
 
             <HomeFeatured />
 
-            {/* Footer Section */}
-            <Footer />
+            {/* Footer and ScrollNav - Excluded from liquid effect */}
+            <div className="relative bg-[#f0f1fa]" style={{ zIndex: 100 }}>
+              {/* Footer Section */}
+              <Footer />
 
-            {/* Scroll Nav Section */}
-            <ScrollNav />
+              {/* Scroll Nav Section */}
+              <ScrollNav />
+            </div>
           </div>
         </div>
       </div>

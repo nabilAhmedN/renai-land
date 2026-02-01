@@ -27,6 +27,7 @@ export default function HomeReel() {
     const overlayRef = useRef(null);
     const closeButtonRef = useRef(null);
     const progressBarRef = useRef(null);
+    const decorativeLineRef = useRef(null);
 
     useEffect(() => {
         const videoPlaceholder = videoPlaceholderRef.current;
@@ -232,6 +233,40 @@ export default function HomeReel() {
         };
     }, []);
 
+    // Decorative line scroll animation
+    useEffect(() => {
+        const linePath = decorativeLineRef.current;
+        if (!linePath) return;
+
+        // Get the total length of the path
+        const pathLength = linePath.getTotalLength();
+
+        // Set initial state - line is hidden
+        gsap.set(linePath, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+        });
+
+        // Animate line draw on scroll
+        const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: '#home-reel',
+                start: 'top 60%',
+                end: 'bottom 40%',
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    // Draw line based on scroll progress
+                    const drawLength = pathLength * (1 - self.progress);
+                    gsap.set(linePath, {
+                        strokeDashoffset: drawLength
+                    });
+                }
+            });
+        });
+
+        return () => ctx.revert();
+    }, []);
+
     // Fullscreen video player functions
     const openFullscreen = () => {
         console.log('Opening fullscreen');
@@ -378,6 +413,32 @@ export default function HomeReel() {
                         </span>
                     </Link>
                 </div>
+
+                {/* Decorative Scroll Line SVG */}
+                <svg
+                    id="decorative-scroll-line"
+                    style={{
+                        position: 'absolute',
+                        right: '10%',
+                        top: '15%',
+                        width: '300px',
+                        height: '600px',
+                        pointerEvents: 'none',
+                        zIndex: 0
+                    }}
+                    viewBox="0 0 300 600"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        ref={decorativeLineRef}
+                        d="M20 20 C 100 50, 250 100, 200 200 S 50 350, 150 400 S 280 500, 280 580"
+                        stroke="rgba(0, 0, 0, 0.15)"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        fill="none"
+                    />
+                </svg>
 
                 {/* Reel Thumb Wrapper */}
                 <div

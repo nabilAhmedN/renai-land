@@ -65,7 +65,7 @@ export default function HomeHero() {
     return (
         <section
             id="home-hero"
-            className="relative w-full grid grid-cols-12 gap-[var(--grid-gap,2rem)]"
+            className="relative w-full grid grid-cols-12 gap-[var(--grid-gap,2rem)] overflow-hidden"
             style={{
                 height: 'calc(var(--vh, 1vh) * 100)',
                 alignContent: 'flex-start',
@@ -77,7 +77,7 @@ export default function HomeHero() {
             <h1
                 id="home-hero-title"
                 ref={titleRef}
-                className="relative h-fit m-0 will-change-transform"
+                className="relative h-fit m-0 will-change-transform z-10"
                 style={{
                     gridColumn: '4 / span 5',
                     lineHeight: '1.1',
@@ -106,7 +106,7 @@ export default function HomeHero() {
             {/* Hero Visual Container - Stacked Images */}
             <div
                 id="home-hero-visual-container"
-                className="col-span-12 relative cursor-pointer"
+                className="col-span-12 relative cursor-pointer z-10"
                 ref={imageStackRef}
                 onClick={handleImageClick}
                 style={{
