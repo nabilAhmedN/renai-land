@@ -23,9 +23,9 @@ const ArrowIcon = () => (
 
 // Social link data
 const socialLinks = [
-    { name: 'Twitter / X', href: 'https://twitter.com/lusionltd/' },
-    { name: 'Instagram', href: 'https://www.instagram.com/lusionltd/' },
-    { name: 'Linkedin', href: 'https://www.linkedin.com/company/lusionltd/' },
+    { name: 'Twitter / X', href: '' },
+    { name: 'Instagram', href: '' },
+    { name: 'Linkedin', href: '' },
 ];
 
 export default function Footer() {
@@ -69,10 +69,10 @@ export default function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <div className="footer-address-line">Suite 2</div>
-                        <div className="footer-address-line">9 Marsh Street</div>
-                        <div className="footer-address-line">Bristol, BS1 4AA</div>
-                        <div className="footer-address-line">United Kingdom</div>
+                        <div className="footer-address-line">Gulshan</div>
+                        <div className="footer-address-line">Rd 09</div>
+                        <div className="footer-address-line">H- 120</div>
+                        <div className="footer-address-line">Dhaka</div>
                     </a>
 
                     {/* Social links */}
@@ -95,16 +95,16 @@ export default function Footer() {
                     {/* General enquiries */}
                     <div id="footer-contact-enquires">
                         <div id="footer-enquires-header">General enquires</div>
-                        <a id="footer-enquires-link" href="mailto:hello@lusion.co">
-                            hello@lusion.co
+                        <a id="footer-enquires-link" href="mailto:info@renai.com">
+                            info@renai.com
                         </a>
                     </div>
 
                     {/* New business */}
                     <div id="footer-contact-business">
                         <div id="footer-business-header">New business</div>
-                        <a id="footer-business-link" href="mailto:business@lusion.co">
-                            business@lusion.co
+                        <a id="footer-business-link" href="mailto:info@renai.com">
+                            info@renai.com
                         </a>
                     </div>
                 </div>
@@ -156,18 +156,18 @@ export default function Footer() {
 
             {/* Bottom section */}
             <div id="footer-bottom">
-                <div id="footer-bottom-copyright">©2025 LUSION Creative Studio</div>
+                <div id="footer-bottom-copyright">©2026 Renai</div>
 
-                <a
+                {/* <a
                     id="footer-bottom-labs"
                     href="https://labs.lusion.co"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     R&D: labs.lusion.co
-                </a>
+                </a> */}
 
-                <div id="footer-bottom-tagline">Built by Lusion with ❤️</div>
+                <div id="footer-bottom-tagline">Built by Soft Bahr ❤️</div>
 
                 <div id="footer-bottom-up" onClick={scrollToTop}>
                     <svg

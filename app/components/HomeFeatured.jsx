@@ -8,76 +8,76 @@ import gsap from 'gsap';
 const projects = [
     {
         id: 'devin_ai',
-        title: 'Devin AI',
-        href: '/projects/devin_ai',
-        tags: 'web • design • development • 3d',
+        title: 'Men',
+        href: '',
+        tags: 'MENSWEAR • APPAREL • FIT • FABRIC',
         bgColor: '#121414',
         textColor: '#ffffff',
         image: '/images/projects/devin-ai.jpg'
     },
     {
         id: 'porsche_dream_machine',
-        title: 'Porsche: Dream Machine',
-        href: '/projects/porsche_dream_machine',
-        tags: 'concept • 3D illustration • mograph • video',
+        title: 'Women',
+        href: '',
+        tags: 'WOMENSWEAR • APPAREL • FORM • FABRIC',
         bgColor: '#EFD5D3',
         textColor: '#000000',
         image: '/images/projects/porsche.jpg'
     },
-    {
-        id: 'synthetic_human',
-        title: 'Synthetic Human',
-        href: '/projects/synthetic_human',
-        tags: 'web • design • development • 3d',
-        bgColor: '#9d8aff',
-        textColor: '#ffffff',
-        image: '/images/projects/synthetic.jpg'
-    },
-    {
-        id: 'spatial_fusion',
-        title: 'Meta: Spatial Fusion',
-        href: '/projects/spatial_fusion',
-        tags: 'web • design • development • 3d',
-        bgColor: '#D6C8ED',
-        textColor: '#000000',
-        image: '/images/projects/spatial.jpg'
-    },
-    {
-        id: 'spaace',
-        title: 'Spaace - NFT Marketplace',
-        href: '/projects/spaace',
-        tags: 'web • design • development • 3d • web3',
-        bgColor: '#010a16',
-        textColor: '#ffece2',
-        image: '/images/projects/spaace.jpg'
-    },
-    {
-        id: 'ddd_2024',
-        title: 'DDD 2024',
-        href: '/projects/ddd_2024',
-        tags: 'web • design • development • 3d',
-        bgColor: '#261c46',
-        textColor: '#ffffff',
-        image: '/images/projects/ddd.jpg'
-    },
-    {
-        id: 'choo_choo_world',
-        title: 'Choo Choo World',
-        href: '/projects/choo_choo_world',
-        tags: 'concept • web • game design • 3d',
-        bgColor: '#E8EEF8',
-        textColor: '#000000',
-        image: '/images/projects/choo.jpg'
-    },
-    {
-        id: 'soda_experience',
-        title: 'Soda Experience',
-        href: '/projects/soda_experience',
-        tags: 'AR • development • 3d',
-        bgColor: '#E1E2E4',
-        textColor: '#000000',
-        image: '/images/projects/soda.jpg'
-    }
+    // {
+    //     id: 'synthetic_human',
+    //     title: 'Synthetic Human',
+    //     href: '/projects/synthetic_human',
+    //     tags: 'web • design • development • 3d',
+    //     bgColor: '#9d8aff',
+    //     textColor: '#ffffff',
+    //     image: '/images/projects/synthetic.jpg'
+    // },
+    // {
+    //     id: 'spatial_fusion',
+    //     title: 'Meta: Spatial Fusion',
+    //     href: '/projects/spatial_fusion',
+    //     tags: 'web • design • development • 3d',
+    //     bgColor: '#D6C8ED',
+    //     textColor: '#000000',
+    //     image: '/images/projects/spatial.jpg'
+    // },
+    // {
+    //     id: 'spaace',
+    //     title: 'Spaace - NFT Marketplace',
+    //     href: '/projects/spaace',
+    //     tags: 'web • design • development • 3d • web3',
+    //     bgColor: '#010a16',
+    //     textColor: '#ffece2',
+    //     image: '/images/projects/spaace.jpg'
+    // },
+    // {
+    //     id: 'ddd_2024',
+    //     title: 'DDD 2024',
+    //     href: '/projects/ddd_2024',
+    //     tags: 'web • design • development • 3d',
+    //     bgColor: '#261c46',
+    //     textColor: '#ffffff',
+    //     image: '/images/projects/ddd.jpg'
+    // },
+    // {
+    //     id: 'choo_choo_world',
+    //     title: 'Choo Choo World',
+    //     href: '/projects/choo_choo_world',
+    //     tags: 'concept • web • game design • 3d',
+    //     bgColor: '#E8EEF8',
+    //     textColor: '#000000',
+    //     image: '/images/projects/choo.jpg'
+    // },
+    // {
+    //     id: 'soda_experience',
+    //     title: 'Soda Experience',
+    //     href: '/projects/soda_experience',
+    //     tags: 'AR • development • 3d',
+    //     bgColor: '#E1E2E4',
+    //     textColor: '#000000',
+    //     image: '/images/projects/soda.jpg'
+    // }
 ];
 
 // Component for animated title characters
@@ -329,7 +329,7 @@ export default function HomeFeatured() {
             {/* CTA Button */}
             <a id="home-featured-cta" href="/projects">
                 <span id="home-featured-cta-dot"></span>
-                <span id="home-featured-cta-text">See all projects</span>
+                <span id="home-featured-cta-text">See all collections</span>
                 <span id="home-featured-cta-arrow">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

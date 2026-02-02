@@ -397,7 +397,7 @@ export default function Header() {
 
                 {/* Factory Button - Separate Element */}
                 <Link
-                    href="https://labs.lusion.co"
+                    href=""
                     target="_blank"
                     className="flex items-center justify-between px-6 py-4 bg-black text-white rounded-xl transition-colors group shadow-2xl hover:bg-[#2b2e3a]"
                     style={{
