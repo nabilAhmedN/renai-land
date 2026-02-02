@@ -28,6 +28,7 @@ export default function HomeReel() {
     const closeButtonRef = useRef(null);
     const progressBarRef = useRef(null);
     const decorativeLineRef = useRef(null);
+    const titleLine1Ref = useRef(null);
 
     useEffect(() => {
         const videoPlaceholder = videoPlaceholderRef.current;
@@ -273,6 +274,27 @@ export default function HomeReel() {
         };
     }, []);
 
+    // Title line scroll animation - moves right on scroll
+    useEffect(() => {
+        const titleLine1 = titleLine1Ref.current;
+        if (!titleLine1) return;
+
+        const ctx = gsap.context(() => {
+            gsap.to(titleLine1, {
+                x: '20vw',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#home-reel',
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    scrub: 1,
+                }
+            });
+        });
+
+        return () => ctx.revert();
+    }, []);
+
     // Fullscreen video player functions
     const openFullscreen = () => {
         console.log('Opening fullscreen');
@@ -373,7 +395,7 @@ export default function HomeReel() {
                     }}
                 >
                     <div id="home-reel-title-inner">
-                        <div id="home-reel-title-line-1" className="inline-block relative">
+                        <div ref={titleLine1Ref} id="home-reel-title-line-1" className="inline-block relative">
                             <span className="word inline-block">Beyond</span>{' '}
                             <span className="word inline-block">Visions</span>
                         </div>
@@ -442,7 +464,7 @@ export default function HomeReel() {
                         ref={decorativeLineRef}
                         d="M 0,3 C 15,8 25,15 30,25 C 35,35 25,45 20,50 C 15,55 10,60 15,68 C 20,76 35,80 50,82 C 65,84 80,88 95,95 C 98,97 100,100 100,100"
                         stroke="#4169e1"
-                        strokeWidth="1"
+                        strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         fill="none"

@@ -11,7 +11,7 @@ export default function HomeHero() {
     const titleRef = useRef(null);
 
     const images = [
-        '/images/renai1.jpeg',
+        '/images/renai4.jpeg',
         '/images/renai2.jpeg',
         '/images/renai3.jpeg'
     ];
