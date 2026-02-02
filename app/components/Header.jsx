@@ -161,7 +161,7 @@ export default function Header() {
                         </button>
 
                         {/* Let's Talk Button */}
-                        <Link href="mailto:hello@lusion.co">
+                        <Link href="">
                             <button
                                 className="group relative flex items-center gap-4 h-11 rounded-full transition-all duration-500 text-xs md:text-sm font-medium uppercase overflow-hidden bg-black text-white shadow-md"
                                 style={{ backgroundColor: '#000000', padding: '1em 1.5em 1em 1.625em', boxShadow: '0 6px 10px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.04)' }}
