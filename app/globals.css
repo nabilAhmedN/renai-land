@@ -42,6 +42,24 @@ body {
   overflow-x: hidden;
 }
 
+/* Sound Wave Animation for Music Button */
+@keyframes soundWave {
+
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+
+.sound-wave-bar {
+  transform-origin: center;
+  animation: soundWave 0.5s ease-in-out infinite;
+}
+
 /* Home Reel CTA Button Styles */
 #home-reel-cta {
   display: flex;

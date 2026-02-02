@@ -21,11 +21,15 @@ const CornerIcon = () => (
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMenuHovered, setIsMenuHovered] = useState(false);
-    const [soundOn, setSoundOn] = useState(false);
+    const [soundOn, setSoundOn] = useState(false); // Will be set to true when audio actually plays
+    const [soundBtnHover, setSoundBtnHover] = useState(false);
+    const [hoverOrigin, setHoverOrigin] = useState({ x: 50, y: 50 });
     const pathname = usePathname();
 
     const logoRef = useRef(null);
     const headerRightRef = useRef(null);
+    const audioRef = useRef(null);
+    const soundBtnRef = useRef(null);
 
     useEffect(() => {
         // Entrance animation for logo - same as text animation
@@ -55,6 +59,56 @@ export default function Header() {
             );
         }
     }, []);
+
+    // Auto-play audio on page load
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        audio.volume = 0.5;
+        audio.loop = true;
+
+        // Auto-play immediately when page loads
+        audio.play().then(() => {
+            // Music started successfully
+            setSoundOn(true);
+        }).catch(() => {
+            // Browser blocked autoplay - show straight line until user clicks
+            setSoundOn(false);
+            const playOnInteraction = () => {
+                audio.play().then(() => {
+                    setSoundOn(true);
+                });
+                document.removeEventListener('click', playOnInteraction);
+            };
+            document.addEventListener('click', playOnInteraction);
+        });
+    }, []);
+
+    // Toggle sound function
+    const toggleSound = () => {
+        const audio = audioRef.current;
+        if (audio) {
+            if (soundOn) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            setSoundOn(!soundOn);
+        }
+    };
+
+    // Handle sound button hover with directional effect
+    const handleSoundBtnMouseEnter = (e) => {
+        const btn = soundBtnRef.current;
+        if (btn) {
+            const rect = btn.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            setHoverOrigin({ x, y });
+        }
+        setSoundBtnHover(true);
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -136,28 +190,46 @@ export default function Header() {
 
                     {/* Header Right - Buttons */}
                     <div id="header-right" ref={headerRightRef} className="flex items-center gap-3 pointer-events-auto">
+                        {/* Audio Element */}
+                        <audio ref={audioRef} src="/audio/Renai-Drying-music.mp3" />
+
                         {/* Sound Button */}
                         <button
-                            onClick={() => setSoundOn(!soundOn)}
-                            className="hidden md:flex w-11 h-11 items-center justify-center rounded-full hover:bg-white transition-colors"
+                            ref={soundBtnRef}
+                            onClick={toggleSound}
+                            onMouseEnter={handleSoundBtnMouseEnter}
+                            onMouseLeave={() => setSoundBtnHover(false)}
+                            className="hidden md:flex w-11 h-11 items-center justify-center rounded-full transition-colors relative overflow-hidden"
                             style={{ backgroundColor: '#e4e6ef' }}
                             aria-label="Toggle sound"
                         >
-                            {soundOn ? (
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <path
-                                        d="M2 9 Q 4.5 5, 7 9 T 12 9 T 17 9"
-                                        stroke="currentColor"
-                                        strokeWidth="1.5"
-                                        fill="none"
-                                        className="animate-pulse"
-                                    />
-                                </svg>
-                            ) : (
-                                <svg width="18" height="2" viewBox="0 0 18 2" fill="none">
-                                    <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" strokeWidth="1.5" />
-                                </svg>
-                            )}
+                            {/* Blue hover fill - expands from mouse entry point */}
+                            <span
+                                className="absolute inset-0 rounded-full transition-transform duration-300 ease-out"
+                                style={{
+                                    backgroundColor: '#4169e1',
+                                    transform: soundBtnHover ? 'scale(1)' : 'scale(0)',
+                                    transformOrigin: `${hoverOrigin.x}% ${hoverOrigin.y}%`
+                                }}
+                            />
+
+                            {/* Icon - needs z-index to stay above the fill */}
+                            <span className={`relative z-10 transition-colors duration-300 ${soundBtnHover ? 'text-white' : 'text-black'}`}>
+                                {soundOn ? (
+                                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" className="sound-wave-container">
+                                        {/* Animated waving bars */}
+                                        <rect x="1" y="4" width="2" height="6" rx="1" fill="currentColor" className="sound-wave-bar" style={{ animationDelay: '0s' }} />
+                                        <rect x="5" y="4" width="2" height="6" rx="1" fill="currentColor" className="sound-wave-bar" style={{ animationDelay: '0.1s' }} />
+                                        <rect x="9" y="4" width="2" height="6" rx="1" fill="currentColor" className="sound-wave-bar" style={{ animationDelay: '0.2s' }} />
+                                        <rect x="13" y="4" width="2" height="6" rx="1" fill="currentColor" className="sound-wave-bar" style={{ animationDelay: '0.3s' }} />
+                                        <rect x="17" y="4" width="2" height="6" rx="1" fill="currentColor" className="sound-wave-bar" style={{ animationDelay: '0.4s' }} />
+                                    </svg>
+                                ) : (
+                                    <svg width="24" height="2" viewBox="0 0 24 2" fill="none">
+                                        <line x1="2" y1="1" x2="22" y2="1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                    </svg>
+                                )}
+                            </span>
                         </button>
 
                         {/* Let's Talk Button */}
