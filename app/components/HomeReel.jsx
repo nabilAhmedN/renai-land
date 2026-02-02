@@ -241,30 +241,36 @@ export default function HomeReel() {
         // Get the total length of the path
         const pathLength = linePath.getTotalLength();
 
-        // Set initial state - line is hidden
-        gsap.set(linePath, {
-            strokeDasharray: pathLength,
-            strokeDashoffset: pathLength
-        });
-
-        // Animate line draw on scroll
+        // Create animation context
         const ctx = gsap.context(() => {
-            ScrollTrigger.create({
-                trigger: '#home-reel',
-                start: 'top 60%',
-                end: 'bottom 40%',
-                scrub: 0.5,
-                onUpdate: (self) => {
-                    // Draw line based on scroll progress
-                    const drawLength = pathLength * (1 - self.progress);
-                    gsap.set(linePath, {
-                        strokeDashoffset: drawLength
-                    });
+            // Set initial state - line is completely hidden
+            gsap.set(linePath, {
+                strokeDasharray: pathLength,
+                strokeDashoffset: pathLength
+            });
+
+            // Animate line draw on scroll
+            gsap.to(linePath, {
+                strokeDashoffset: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#home-reel',
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    scrub: 1.2,
                 }
             });
         });
 
-        return () => ctx.revert();
+        // Refresh ScrollTrigger after a short delay to ensure proper initialization
+        const refreshTimeout = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 100);
+
+        return () => {
+            clearTimeout(refreshTimeout);
+            ctx.revert();
+        };
     }, []);
 
     // Fullscreen video player functions
@@ -414,28 +420,31 @@ export default function HomeReel() {
                     </Link>
                 </div>
 
-                {/* Decorative Scroll Line SVG */}
+                {/* Decorative Scroll Line SVG - Full Height Bezier Curve */}
                 <svg
                     id="decorative-scroll-line"
+                    viewBox="0 0 100 100"
+                    fill="none"
+                    preserveAspectRatio="none"
                     style={{
                         position: 'absolute',
-                        right: '10%',
-                        top: '15%',
-                        width: '300px',
-                        height: '600px',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
                         pointerEvents: 'none',
-                        zIndex: 0
+                        zIndex: -1,
+                        overflow: 'visible'
                     }}
-                    viewBox="0 0 300 600"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
                         ref={decorativeLineRef}
-                        d="M20 20 C 100 50, 250 100, 200 200 S 50 350, 150 400 S 280 500, 280 580"
-                        stroke="rgba(0, 0, 0, 0.15)"
-                        strokeWidth="2"
+                        d="M 0,3 C 15,8 25,15 30,25 C 35,35 25,45 20,50 C 15,55 10,60 15,68 C 20,76 35,80 50,82 C 65,84 80,88 95,95 C 98,97 100,100 100,100"
+                        stroke="#4169e1"
+                        strokeWidth="1"
                         strokeLinecap="round"
+                        strokeLinejoin="round"
                         fill="none"
                     />
                 </svg>
